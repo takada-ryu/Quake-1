@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quake 1</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=VT323&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="icon.png" type="image/png">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="ndot">QUAKE 1</h1>
+            <div class="header-right">
+                <button id="lang-toggle" class="lang-btn">JP / EN</button>
+                <div class="subtitle">©Takada 2025</div>
+            </div>
+        </header>
+
+        <main>
+            <div class="player-grid">
+                <!-- Visualizer Area -->
+                <div class="visualizer-container">
+                    <canvas id="visualizer"></canvas>
+                    <div class="status-overlay">
+                        <span id="status-text" data-i18n="no_input">NO INPUT</span>
+                    </div>
+                </div>
+
+                <!-- Controls -->
+                <div class="controls-wrapper">
+                    
+                    <!-- File Input -->
+                    <div class="control-group file-group">
+                        <label for="audio-upload" class="custom-file-upload">
+                            <span class="icon">➜</span> <span data-i18n="select_audio">SELECT AUDIO</span>
+                        </label>
+                        <input type="file" id="audio-upload" accept="audio/*">
+                        <div id="file-name">...</div>
+                    </div>
+
+                    <!-- Playback -->
+                    <div class="control-group playback-group">
+                        <button id="play-btn" disabled data-i18n="play">PLAY</button>
+                        <button id="stop-btn" disabled data-i18n="stop">STOP</button>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Spatial Settings -->
+                    <div class="control-group">
+                        <label class="group-label" data-i18n="dimension">DIMENSION</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="spatial" value="off" checked>
+                                <span class="radio-box"></span>
+                                OFF
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="spatial" value="8d">
+                                <span class="radio-box"></span>
+                                8D
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="spatial" value="16d">
+                                <span class="radio-box"></span>
+                                16D
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="spatial" value="32d">
+                                <span class="radio-box"></span>
+                                32D
+                            </label>
+                            <label class="radio-item special">
+                                <input type="radio" name="spatial" value="48d">
+                                <span class="radio-box"></span>
+                                48D (SSS)
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Bass Settings -->
+                    <div class="control-group">
+                        <label class="group-label" data-i18n="bass_intensity">BASS INTENSITY</label>
+                        <div class="radio-grid">
+                            <label class="radio-item">
+                                <input type="radio" name="bass" value="off" checked>
+                                <span class="radio-box"></span>
+                                FLAT
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="bass" value="low">
+                                <span class="radio-box"></span>
+                                LOW
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="bass" value="medium">
+                                <span class="radio-box"></span>
+                                MID
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="bass" value="high">
+                                <span class="radio-box"></span>
+                                HIGH
+                            </label>
+                            <label class="radio-item">
+                                <input type="radio" name="bass" value="extra">
+                                <span class="radio-box"></span>
+                                EX-HIGH
+                            </label>
+                            <label class="radio-item danger">
+                                <input type="radio" name="bass" value="earthquake">
+                                <span class="radio-box"></span>
+                                EARTHQUAKE
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- Export -->
+                    <div class="control-group">
+                        <label class="group-label" data-i18n="export">EXPORT</label>
+                        <div class="control-group playback-group">
+                            <button id="render-btn" disabled data-i18n="render">RENDER</button>
+                            <a id="download-link" class="download-link" href="#" download="quake1.wav" aria-disabled="true" data-i18n="download">DOWNLOAD</a>
+                        </div>
+                        <div id="export-status">...</div>
+                    </div>
+
+                    <div class="divider"></div>
+
+                    <!-- History -->
+                    <div class="control-group">
+                         <button id="history-toggle-btn" data-i18n="history_btn">HISTORY LIST</button>
+                    </div>
+
+                </div>
+            </div>
+        </main>
+        
+        <footer>
+            <div class="marquee">
+                <span>NOTHING BUT SOUND // QUAKE 1 // AUDIO ENGINE READY // WAITING FOR INPUT // </span>
+            </div>
+        </footer>
+
+        <!-- History Modal -->
+        <div id="history-modal" class="modal hidden">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="ndot" data-i18n="history_title">HISTORY</h2>
+                    <button id="close-history" class="close-btn">×</button>
+                </div>
+                <div id="history-list" class="history-list">
+                    <!-- History items injected here -->
+                    <div class="empty-msg" data-i18n="no_history">NO HISTORY</div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
